@@ -1,10 +1,6 @@
 
 data "aws_iam_user" "devops" {
-  user_name = "devops"
-}
-
-data "aws_iam_user" "eksdeveloper" {
-  user_name = "eksdeveloper"
+  user_name = "otel"
 }
 
 resource "aws_eks_access_entry" "example" {
@@ -14,12 +10,6 @@ resource "aws_eks_access_entry" "example" {
   type = "STANDARD"
 }
 
-resource "aws_eks_access_entry" "eksdeveloper" {
-  cluster_name      = aws_eks_cluster.eks-cluster.name
-  principal_arn     = data.aws_iam_user.eksdeveloper.arn
-  kubernetes_groups = ["developer-group"]
-  type              = "STANDARD"
-}
 
 resource "aws_eks_access_policy_association" "eks-cluster-admin-policy-1" {
   cluster_name  = aws_eks_cluster.eks-cluster.name
@@ -62,8 +52,4 @@ resource "aws_eks_access_policy_association" "eks-admin-policy-3" {
 
 output "user_arn" {
   value = data.aws_iam_user.devops.arn
-}
-
-output "user_arn_eksdeveloper" {
-  value = data.aws_iam_user.eksdeveloper.arn
 }
