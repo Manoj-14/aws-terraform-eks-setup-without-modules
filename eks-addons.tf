@@ -11,7 +11,7 @@ resource "aws_eks_addon" "eks-addon" {
 resource "aws_eks_addon" "ebs-csi" {
   cluster_name             = aws_eks_cluster.eks-cluster.name
   addon_name               = "aws-ebs-csi-driver"
-  addon_version            = "v1.38.1-eksbuild.1"
+  addon_version            = "v1.44.0-eksbuild.1"
   service_account_role_arn = aws_iam_role.ebs_csi_iam_role.arn
   tags = {
     "eks_addon" = "ebs-csi"
